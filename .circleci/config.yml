@@ -8,6 +8,7 @@ test-defaults: &test-defaults
 
 monitor-defaults: &monitor-defaults
   working_directory: ~/code
+  resource_class: small
   docker:
     - image: circleci/node:8
       environment:

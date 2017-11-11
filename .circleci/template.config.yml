@@ -1,6 +1,7 @@
 
 monitor-defaults: &monitor-defaults
   working_directory: ~/code
+  resource_class: small
   docker:
     - image: circleci/node:8-browsers # remove -browsers if you're not doing browser tests
       environment:
