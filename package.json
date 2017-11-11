@@ -1,7 +1,7 @@
 {
   "name": "@dollarshaveclub/monitor",
-  "version": "0.0.0",
-  "description": "A remote uptime monitoring framework",
+  "version": "1.0.0",
+  "description": "A remote uptime monitoring framework for running monitors as a CRON job",
   "scripts": {
     "test": "jest --coverage",
     "monitors": "./bin/run.js 'monitors/**/*.js'",
