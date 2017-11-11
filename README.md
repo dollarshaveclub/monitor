@@ -4,11 +4,11 @@
 [![codecov](https://codecov.io/gh/dollarshaveclub/monitor/branch/master/graph/badge.svg?token=7dgu14EsZp)](https://codecov.io/gh/dollarshaveclub/monitor)
 [![Greenkeeper badge](https://badges.greenkeeper.io/dollarshaveclub/monitor.svg?token=882bf829fa5624cf562abac32aa14c00e2b636aa738c8bd72593b26740655743&ts=1510381924742)](https://greenkeeper.io/)
 
-A remote uptime monitoring framework intended to be used via CRON.
+A remote uptime monitoring framework for running monitors as a CRON job.
 
 At Dollar Shave Club, we run our monitors using CircleCI 2 Scheduled Workflows.
-You can see the test monitors for this repository running every minute here: https://circleci.com/gh/dollarshaveclub/workflows/monitor/tree/master
-See our [CircleCI 2 Config](.circleci/config.yml) to see how we've set this up.
+You can see the test monitors for this repository running every minute here: https://circleci.com/gh/dollarshaveclub/workflows/monitor/tree/master.
+See our [CircleCI 2 Config](.circleci/config.yml).
 
 ## Motivation
 
@@ -51,7 +51,7 @@ If you've `npm install --global @dollarshaveclub/monitor`, just run `dsc-monitor
 
 ### Via Docker
 
-Copy our [Dockerfile](Dockerfile) in your repository, then run: 
+Copy our [Dockerfile](Dockerfile) in your repository, then run:
 
 ```bash
 docker build -t dsc-monitor
