@@ -36,5 +36,9 @@
     "uptime",
     "monitoring",
     "testing"
+  ],
+  "files": [
+    "bin",
+    "lib"
   ]
 }
