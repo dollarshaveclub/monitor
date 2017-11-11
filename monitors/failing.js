@@ -14,7 +14,7 @@ exports.monitors = [
     parameters: {
     },
     monitor () {
-      throw new Error('boom')
+      if (process.env.NODE_ENV === 'test') throw new Error('boom')
     },
   },
 

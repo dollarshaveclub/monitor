@@ -10,6 +10,8 @@ At Dollar Shave Club, we run our monitors using CircleCI 2 Scheduled Workflows.
 You can see the test monitors for this repository running every minute here: https://circleci.com/gh/dollarshaveclub/workflows/monitor/tree/master
 See our [CircleCI 2 Config](.circleci/config.yml) to see how we've set this up.
 
+## Motivation
+
 By switching to this monitoring solution from [New Relic Synthetics](https://newrelic.com/synthetics/pricing), we were able to:
 
 - Save hundreds of dollars on New Relic Synthetics costs
@@ -21,8 +23,13 @@ By switching to this monitoring solution from [New Relic Synthetics](https://new
 
 Because our monitors only use 1 CircleCI container, we essentially pay $50/month for unlimited monitors as long those monitors run in less than 1 minute. Some downsides to this setup is:
 
-- Contention with your other tests
+- Contention with your other tests. If you run out of CircleCI 2 containers, your monitors will queue then run in bursts.
 - May not be as fast as running monitors as Kubernetes jobs as CircleCI does many commands like `npm install` on every build, which could be slower than just pulling a docker container. However, having a CircleCI UI is a lot better.
+
+What about features other monitoring solutions provide?
+
+- We pipe all our metrics to DataDog and create all the relevant dashboards
+- We still use other services like New Relic for features we need, just not for monitoring everything
 
 ## Creating your Monitoring Repository
 
