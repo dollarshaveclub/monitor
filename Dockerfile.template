@@ -12,4 +12,4 @@ COPY . /app
 RUN npm install
 
 CMD [ "monitors/**/*.js" ]
-ENTRYPOINT [ "node", "./bin/run.js" ]
+ENTRYPOINT [ "node ./node_modules/.bin/dsc-monitor" ]

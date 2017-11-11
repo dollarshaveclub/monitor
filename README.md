@@ -51,7 +51,7 @@ If you've `npm install --global @dollarshaveclub/monitor`, just run `dsc-monitor
 
 ### Via Docker
 
-Copy our [Dockerfile](Dockerfile) in your repository, then run:
+Copy our [Dockerfile Template](Dockerfile.template) to your repository, then run:
 
 ```bash
 docker build -t dsc-monitor
