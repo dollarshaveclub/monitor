@@ -28,7 +28,7 @@ Because our monitors only use 1 CircleCI container, we essentially pay $50/month
 
 What about features other monitoring solutions provide?
 
-- We pipe all our metrics to DataDog and create all the relevant dashboards
+- We pipe all our metrics to Datadog and create all the relevant dashboards
 - We still use other services like New Relic for features we need, just not for monitoring everything
 
 ## Creating your Monitoring Repository
