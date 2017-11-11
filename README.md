@@ -15,6 +15,7 @@ By switching to this monitoring solution from [New Relic Synthetics](https://new
 - Run our monitors every minute instead of every 5 minutes
 - Test our monitoring scripts, both API and Browser scripts, outside of New Relic's console. We were unable to do this with our Terraform setup.
 - Use these monitoring scripts as tests for our Dynamic QA environments (our version of [Heroku Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps))
+  - Additionally, we can develop monitors as the same time as our features, allowing us to merge them at once
 - Able to easily create and manage hundreds of monitors, which is difficult with Terraform (excessive copy pasta) and any UI-based monitors
 
 Because our monitors only use 1 CircleCI container, we essentially pay $50/month for unlimited monitors as long those monitors run in less than 1 minute. Some downsides to this setup is:
