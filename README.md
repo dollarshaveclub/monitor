@@ -24,12 +24,16 @@ By switching to this monitoring solution from [New Relic Synthetics](https://new
 Because our monitors only use 1 CircleCI container, we essentially pay $50/month for unlimited monitors as long those monitors run in less than 1 minute. Some downsides to this setup is:
 
 - Contention with your other tests. If you run out of CircleCI 2 containers, your monitors will queue then run in bursts.
-- May not be as fast as running monitors as Kubernetes jobs as CircleCI does many commands like `npm install` on every build, which could be slower than just pulling a docker container. However, having a CircleCI UI is a lot better.
+- May not be as fast as running monitors as Kubernetes jobs as CircleCI does many commands like `npm install` on every build,
+  which could be slower than just pulling a docker container.
+  However, having a CircleCI UI is a lot better.
 
 What about features other monitoring solutions provide?
 
 - We pipe all our metrics to Datadog and create all the relevant dashboards
 - We still use other services like New Relic for features we need, just not for monitoring everything
+- We don't need to run these monitors from multiple locations.
+  If we do, we'll run them as Kubernetes jobs on different clusters.
 
 ## Running Monitors
 
