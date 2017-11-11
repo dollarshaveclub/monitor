@@ -79,7 +79,9 @@ mkdir monitors
 
 Monitor environment variables:
 
-- `MONITOR_CONCURRENCY=2` - concurrency of monitors running at the same time
+- `MONITOR_CONCURRENCY=1` - concurrency of monitors running at the same time
+  - When `concurrency === 1`, results will stream to `stdout`
+  - When `concurrency >= 1`, results will be logged one monitor set at a time
 - `MONITOR_SHUFFLE` - whether to shuffle monitors and monitor sets
 - `MONITOR_SHUFFLE_MONITOR_SETS` - whether to shuffle monitor sets
 - `MONITOR_SHUFFLE_MONITORS` - whether to shuffle monitors within a set

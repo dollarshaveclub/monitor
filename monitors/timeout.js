@@ -9,7 +9,7 @@ exports.monitors = [
     async monitor () {
       if (++i < 3) {
         await new Promise(resolve => {
-          setTimeout(resolve, 150).unref()
+          setTimeout(resolve, 150)
         })
       }
     },

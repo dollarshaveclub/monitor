@@ -6,7 +6,6 @@ monitor-defaults: &monitor-defaults
       environment:
         NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
         JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
-        MONITOR_CONCURRENCY: 2 # set to the # of CPUs in your CircleCI container
         MONITOR_SHUFFLE: 1 # remove if you don't want to shuffle your monitors
 
 restore_cache_keys: &restore_cache_keys
