@@ -33,8 +33,8 @@ mkdir monitors
 ```
 
 1. Create a test monitor. You can use one of [our example monitors](monitors/).
-1. Add the following `script` to your `package.json`: `"monitor": "dsc-monitor 'monitors/**/*.js'"`
-1. Run your monitors with `npm run monitor`
+1. Add the following `script` to your `package.json`: `"monitors": "dsc-monitor 'monitors/**/*.js'"`
+1. Run your monitors with `npm run monitors`
 
 ## Running Monitors
 

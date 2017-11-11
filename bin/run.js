@@ -35,8 +35,10 @@ if (program.shuffleMonitorSets || program.shuffle) options.shuffleMonitorSets = 
 if (program.shuffleMonitors || program.shuffle) options.shuffleMonitors = true
 
 runMonitors(monitorSetConfigs, options).exec().then((results) => {
-  if (results.every(result => result.success)) process.exit(0)
-  throw new Error('Failing monitors detected!')
+  if (results.every(result => result.success)) return process.exit(0)
+
+  console.error('Failing monitors detected!')
+  process.exit(1)
 }).catch((err) => {
   console.error(err.stack)
   process.exit(1)
