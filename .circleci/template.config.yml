@@ -7,6 +7,7 @@ monitor-defaults: &monitor-defaults
       environment:
         NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
         JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
+        MONITOR_CONCURRENCY: 1 # we recommend 1 concurrency per CPU
         MONITOR_SHUFFLE: 1 # remove if you don't want to shuffle your monitors
 
 restore_cache_keys: &restore_cache_keys
