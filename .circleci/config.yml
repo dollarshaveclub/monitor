@@ -1,0 +1,66 @@
+test-defaults: &test-defaults
+  working_directory: ~/code
+  docker:
+    - image: circleci/node:8
+      environment:
+        NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
+        JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
+        MONITOR_CONCURRENCY: 1
+
+monitor-defaults: &monitor-defaults
+  working_directory: ~/code
+  docker:
+    - image: circleci/node:8
+      environment:
+        NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
+        JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
+        MONITOR_CONCURRENCY: 2
+        MONITOR_SHUFFLE: 1
+
+restore_cache_keys: &restore_cache_keys
+  keys:
+    - code-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "package.json" }}
+    - code-master-{{ checksum ".nvmrc" }}-{{ checksum "package.json" }}
+
+save_cache: &save_cache
+  key: code-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "package.json" }}
+  paths:
+    - node_modules
+
+version: 2
+jobs:
+  test:
+    <<: *test-defaults
+    steps:
+      - checkout
+      - restore_cache: *restore_cache_keys
+      - run: npm install
+      - run: npm run eslint:ci
+      - run: npm run test
+      - run: ./node_modules/.bin/codecov
+      - save_cache: *save_cache
+
+  monitor:
+    <<: *monitor-defaults
+    steps:
+      - checkout
+      - restore_cache: *restore_cache_keys
+      - run: npm install
+      - run: ./bin/run.js 'monitors/**/*.js'
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - test
+      - monitor
+  monitor:
+    triggers:
+      - schedule:
+          cron: "* * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - monitor
