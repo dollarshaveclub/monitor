@@ -11,7 +11,7 @@ const program = require('commander')
   .option('-sms, --shuffle-monitor-sets', 'shuffle monitor sets')
   .parse(process.argv)
 
-const debug = require('debug')('face-monitor:bin')
+const debug = require('debug')('monitor:bin')
 const globby = require('globby')
 const path = require('path')
 
