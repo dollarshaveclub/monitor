@@ -1,4 +1,4 @@
-FROM circleci/node:8
+FROM node:8-alpine
 
 # Reduce excessive npm logs
 ENV NPM_CONFIG_LOGLEVEL error
