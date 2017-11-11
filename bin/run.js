@@ -37,7 +37,7 @@ if (program.shuffleMonitors || program.shuffle) options.shuffleMonitors = true
 runMonitors(monitorSetConfigs, options).exec().then((results) => {
   debug('%o', results)
   if (results.every(result => result.success)) {
-    setImmediate(() => process.exit(0))
+    // setImmediate(() => process.exit(0))
     return
   }
 
