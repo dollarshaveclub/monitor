@@ -1,0 +1,46 @@
+
+monitor-defaults: &monitor-defaults
+  working_directory: ~/code
+  docker:
+    - image: circleci/node:8-browsers # remove -browsers if you're not doing browser tests
+      environment:
+        NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
+        JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
+        MONITOR_CONCURRENCY: 2 # set to the # of CPUs in your CircleCI container
+        MONITOR_SHUFFLE: 1 # remove if you don't want to shuffle your monitors
+
+restore_cache_keys: &restore_cache_keys
+  keys:
+    - code-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "package.json" }}
+    - code-master-{{ checksum ".nvmrc" }}-{{ checksum "package.json" }}
+
+save_cache: &save_cache
+  key: code-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "package.json" }}
+  paths:
+    - node_modules
+
+version: 2
+jobs:
+  monitor:
+    <<: *monitor-defaults
+    steps:
+      - checkout
+      - restore_cache: *restore_cache_keys
+      - run: npm install
+      - run: ./node_modules/.bin/dsc-monitor 'monitors/**/*.js'
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - monitor
+  monitor:
+    triggers:
+      - schedule:
+          cron: "* * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - monitor

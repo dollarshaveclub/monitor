@@ -31,6 +31,33 @@ What about features other monitoring solutions provide?
 - We pipe all our metrics to Datadog and create all the relevant dashboards
 - We still use other services like New Relic for features we need, just not for monitoring everything
 
+## Running Monitors
+
+There are two ways to run these monitors.
+
+### Locally
+
+To run monitors locally:
+
+```bash
+./node_modules/.bin/dsc-monitor 'monitors/**/*.js'
+```
+
+Run `dsc-monitor --help` for options.
+
+NOTE: this assumes you've installed this library as a local dependency, which is installed as `dsc-monitor`.
+If you're running the monitors from this repository, use `./bin/run.js`.
+If you've `npm install --global @dollarshaveclub/monitor`, just run `dsc-monitor`.
+
+### Via Docker
+
+Copy our [Dockerfile](Dockerfile) in your repository, then run: 
+
+```bash
+docker build -t dsc-monitor
+docker run -t dsc-monitor 'monitors/**/*.js'
+```
+
 ## Creating your Monitoring Repository
 
 ```bash
@@ -42,41 +69,11 @@ mkdir monitors
 ```
 
 1. Create a test monitor. You can use one of [our example monitors](monitors/).
-1. Add the following `script` to your `package.json`: `"monitors": "dsc-monitor 'monitors/**/*.js'"`
-1. Run your monitors with `npm run monitors`
-
-## Running Monitors
-
-There are two ways to run these monitors.
-
-### Locally
-
-To run monitors locally:
-
-```bash
-dsc-monitor 'monitors/**/*.js'
-```
-
-Run `dsc-monitor --help` for options.
-
-NOTE: this assumes you've installed this library, which is installed as `dsc-monitor`.
-If you're running the monitors from this repository, use `./bin/run.js`.
-
-### Via Docker
-
-```bash
-docker build -t dsc-monitor
-docker run -t dsc-monitor 'monitors/**/*.js'
-```
-
-## Scheduling Monitors
-
-### CircleCI
-
-See CircleCI 2 workflow scheduling: https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow
-
-See all builds on master of workflow `monitor` without a commit attached to it: https://circleci.com/gh/dollarshaveclub/monitor/tree/master
-Or just look at the `monitor` workflow: https://circleci.com/gh/dollarshaveclub/workflows/monitor/tree/master
+1. Add the `npm run monitors` command:
+  1. Add the following `script` to your `package.json`: `"monitors": "dsc-monitor 'monitors/**/*.js'"`
+  1. Run your monitors with `npm run monitors`
+1. Setting up your monitors in CircleCI as a CRON job:
+  1. Copy [.circleci/template.config.yml](.circleci/template.config.yml) to `.circleci/config.yml` and push
 
 ## Environment Variables
 
@@ -111,3 +108,14 @@ Each set is a module with:
 What certain fields do:
 
 - `slowThreshold` - turns the color of the time from `green` to `yellow` when a monitor or set of monitors take this amount of time
+
+## Notes
+
+### Scheduling Monitors
+
+#### CircleCI
+
+See CircleCI 2 workflow scheduling: https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow. You can work off our [.circleci/config.yml](.circleci/template.config.yml) template
+
+See all builds on master of workflow `monitor` without a commit attached to it: https://circleci.com/gh/dollarshaveclub/monitor/tree/master
+Or just look at the `monitor` workflow: https://circleci.com/gh/dollarshaveclub/workflows/monitor/tree/master
