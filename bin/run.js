@@ -34,8 +34,10 @@ if (program.concurrency && !isNaN(program.concurrency)) options.concurrency = pr
 if (program.shuffleMonitorSets || program.shuffle) options.shuffleMonitorSets = true
 if (program.shuffleMonitors || program.shuffle) options.shuffleMonitors = true
 
+console.log('a')
 runMonitors(monitorSetConfigs, options).exec().then((results) => {
   debug('%o', results)
+  console.log('x')
   if (results.every(result => result.success)) {
     // setImmediate(() => process.exit(0))
     return
