@@ -30,7 +30,9 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "bin": "./bin/run.js",
+  "bin": {
+    "dsc-monitor": "./bin/run.js"
+  },
   "keywords": [
     "remote",
     "uptime",
