@@ -7,7 +7,6 @@ monitor-defaults: &monitor-defaults
       environment:
         NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
         JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
-        FORCE_COLOR: 1 # https://www.npmjs.com/package/chalk#chalksupportscolor
         MONITOR_CONCURRENCY: 1 # we recommend 1 concurrency per CPU
         MONITOR_SHUFFLE: 1 # remove if you don't want to shuffle your monitors
 
