@@ -9,6 +9,6 @@ exports.monitors = [
     monitor () {
       if (++i < 3) throw new Error('boom')
     },
-    retries: 3,
+    retries: 2,
   },
 ]

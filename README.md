@@ -103,7 +103,7 @@ Each set is a module with:
   - `monitor<Function>(monitorConfig, monitorSetConfig) [required]` - the monitor function, which is passed this monitor object as well as `exports`
   - `timeout<Number|String> = '5s' [optional]` - timeout for the monitor before it's considered a failure
   - `slowThreshold<Number|String> = '1s' [optional]` - slow threshold for a monitor
-  - `retries<Number> = 1 [optional]` - number of times to retry a failing monitor
+  - `retries<Number> = 0 [optional]` - number of times to retry a failing monitor
 - Optional functions to run within the life cycle of the monitoring set:
   - `exports.beforeAll<Function>(monitorSetConfig)`
   - `exports.afterAll<Function>(monitorSetConfig, result)`

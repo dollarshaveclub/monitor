@@ -14,6 +14,6 @@ exports.monitors = [
       }
     },
     timeout: 100,
-    retries: 3,
+    retries: 2,
   },
 ]
