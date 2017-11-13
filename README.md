@@ -12,16 +12,16 @@ See our [CircleCI 2 Config](.circleci/config.yml).
 
 ## Motivation
 
-By switching to this monitoring solution from [New Relic Synthetics](https://newrelic.com/synthetics/pricing), we were able to:
+By switching to this monitoring solution, we were able to:
 
-- Save hundreds of dollars on New Relic Synthetics costs
+<!-- - Save hundreds of dollars on New Relic Synthetics costs -->
 - Run our monitors every minute instead of every 5 minutes
 - Test our monitoring scripts, both API and Browser scripts, outside of New Relic's console. We were unable to do this with our Terraform setup.
 - Use these monitoring scripts as tests for our Dynamic QA environments (our version of [Heroku Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps))
-  - Additionally, we can develop monitors as the same time as our features, allowing us to merge them at once
+  - Additionally, we can develop monitors as the same time as our features, allowing us to develop and merge them at once. We no longer have conflicts between our codebase and our monitors.
 - Able to easily create and manage hundreds of monitors, which is difficult with Terraform (excessive copy pasta) and any UI-based monitors
 
-Because our monitors only use 1 CircleCI container, we essentially pay $50/month for unlimited monitors as long those monitors run in less than 1 minute. Some downsides to this setup is:
+Because our monitors only use 1 CircleCI container, we essentially pay less than $50/month for unlimited monitors as long those monitors run in less than 1 minute. Some downsides to this setup is:
 
 - Contention with your other tests. If you run out of CircleCI 2 containers, your monitors will queue then run in bursts.
 - May not be as fast as running monitors as Kubernetes jobs as CircleCI does many commands like `npm install` on every build,
@@ -30,7 +30,7 @@ Because our monitors only use 1 CircleCI container, we essentially pay $50/month
 
 What about features other monitoring solutions provide?
 
-- We pipe all our metrics to Datadog and create all the relevant dashboards
+- We pipe all our metrics to Datadog and create all the relevant dashboards and alerts via Datadog
 - We still use other services like New Relic for features we need, just not for monitoring everything
 - We don't need to run these monitors from multiple locations.
   If we do, we'll run them as Kubernetes jobs on different clusters.
