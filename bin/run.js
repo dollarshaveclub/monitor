@@ -5,6 +5,7 @@
 const program = require('commander')
   .version(require('../package.json').version)
   .usage('[options] <tests>')
+  .option('-p, --plugin <filename>', 'add a plugin', String)
   .option('-c, --concurrency <n>', 'monitor concurrency', parseInt)
   .option('-s, --shuffle', 'shuffle monitors and monitor sets')
   .option('-sm, --shuffle-monitors', 'shuffle monitors')
@@ -34,13 +35,23 @@ if (program.concurrency && !isNaN(program.concurrency)) options.concurrency = pr
 if (program.shuffleMonitorSets || program.shuffle) options.shuffleMonitorSets = true
 if (program.shuffleMonitors || program.shuffle) options.shuffleMonitors = true
 
-runMonitors(monitorSetConfigs, options).exec().then((results) => {
+const runner = runMonitors(monitorSetConfigs, options)
+
+if (program.plugin) {
+  const plugin = require(path.resolve(program.plugin))
+  plugin(runner)
+}
+
+runner.exec().then((results) => {
   debug('%o', results)
-  if (results.every(result => result.success)) return
+  if (results.every(result => result.success)) {
+    process.exitCode = 0
+    return
+  }
 
   console.error('Failing monitors detected!')
-  process.exit(1)
+  process.exitCode = 1
 }).catch((err) => {
   console.error(err.stack)
-  process.exit(1)
+  process.exitCode = 1
 })

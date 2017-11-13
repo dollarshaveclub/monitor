@@ -68,7 +68,7 @@ docker run -t dsc-monitor 'monitors/**/*.js'
 mkdir my-monitors # whatever your repo is called
 cd my-monitors
 npm init
-npm i --save @dollarshaveclub/monitors
+npm i --save @dollarshaveclub/monitor
 mkdir monitors
 ```
 
@@ -114,6 +114,45 @@ Each set is a module with:
 What certain fields do:
 
 - `slowThreshold` - turns the color of the time from `green` to `yellow` when a monitor or set of monitors take this amount of time
+
+## Plugins
+
+Create a file called `dsc-monitor.js` of the form:
+
+```js
+module.exports = (monitorRunner) => {
+
+}
+```
+
+Then pass it as a plugin when you run the monitors:
+
+```bash
+dsc-monitor -p dsc-monitor.js 'monitors/**/*.js'
+```
+
+### Events
+
+Hook into events via `monitorRunner.events.on(<event>, callback)`. The events are:
+
+- `monitorSet` => `(result) => {}` - when a monitor set is completed
+  - `monitorSetConfig`
+  - `results` - array of `monitor` results
+  - `success = true|false`
+  - `elapsedTime` - in milliseconds
+- `monitor` => `(result) => {}` - when a monitor is completed
+  - `monitorSetConfig`
+  - `monitorConfig`
+  - `results` - array of `monitorAttempt` results
+  - `success = true|false`
+  - `elapsedTime` - in milliseconds
+- `monitorAttempt` => `(result) => {}` - when a monitor attempt is completed
+  - `monitorSetConfig`
+  - `monitorConfig`
+  - `success = true|false`
+  - `elapsedTime` - in milliseconds
+  - `error` - if an error occured
+  - `attempt = 1` - attempt #
 
 ## Notes
 
