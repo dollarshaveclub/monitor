@@ -18,15 +18,15 @@ By switching to this monitoring solution, we were able to:
 - Run our monitors every minute instead of every 5 minutes
 - Test our monitoring scripts, both API and Browser scripts, outside of New Relic's console. We were unable to do this with our Terraform setup.
 - Use these monitoring scripts as tests for our Dynamic QA environments (our version of [Heroku Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps))
-  - Additionally, we can develop monitors as the same time as our features, allowing us to develop and merge them at once. We no longer have conflicts between our codebase and our monitors.
+  - Additionally, we can develop monitors alongside our features, allowing us to develop and merge them simultaneously. We no longer have conflicts between our codebase and our monitors.
 - Able to easily create and manage hundreds of monitors, which is difficult with Terraform (excessive copy pasta) and any UI-based monitors
 
-Because our monitors only use 1 CircleCI container, we essentially pay less than $50/month for unlimited monitors as long those monitors run in less than 1 minute. Some downsides to this setup is:
+Because our monitors only use 1 CircleCI container, we essentially pay less than $50/month for unlimited monitors (as long as they run in less than 1 minute). Some downsides to this setup:
 
 - Contention with your other tests. If you run out of CircleCI 2 containers, your monitors will queue then run in bursts.
-- May not be as fast as running monitors as Kubernetes jobs as CircleCI does many commands like `npm install` on every build,
-  which could be slower than just pulling a docker container.
-  However, having a CircleCI UI is a lot better.
+- May not be as fast as running monitors as Kubernetes jobs because CircleCI does many commands like `npm install` on every build,
+  which could be slower than just pulling a Docker container.
+  However, having a CircleCI UI is preferable.
 
 What about features other monitoring solutions provide?
 
@@ -65,7 +65,7 @@ docker run -t dsc-monitor 'monitors/**/*.js'
 ## Creating your Monitoring Repository
 
 ```bash
-mkdir my-monitors # whatever your repo is called
+mkdir my-monitors # your repository name
 cd my-monitors
 npm init
 npm i --save @dollarshaveclub/monitor
@@ -92,13 +92,13 @@ Monitor environment variables:
 
 ## Defining Monitors
 
-All monitoring set is defined in `monitors/`.
+All monitoring sets are defined in `monitors/`.
 Each set is a module with:
 
 - `exports.id<String> = __filename [optional]` - an ID for your monitor set, defaulting to the filename
 - `exports.slowThreshold<Number|String> = 30s [optional]` - slow threshold for the entire monitor set
 - `exports.monitors<Array>` - an array of monitors with the following properties:
-  - `id<String> required` - the ID of the monitor
+  - `id<String> [required]` - the ID of the monitor
   - `parameters<Object> [optional]` - parameters to send to the monitor function and for data purposes
   - `monitor<Function>(monitorConfig, monitorSetConfig) [required]` - the monitor function, which is passed this monitor object as well as `exports`
   - `timeout<Number|String> = '5s' [optional]` - timeout for the monitor before it's considered a failure
@@ -117,7 +117,7 @@ What certain fields do:
 
 ## Plugins
 
-Create a file called `dsc-monitor.js` of the form:
+Create a file named `dsc-monitor.js` with the form:
 
 ```js
 module.exports = (monitorRunner) => {
@@ -125,7 +125,7 @@ module.exports = (monitorRunner) => {
 }
 ```
 
-Then pass it as a plugin when you run the monitors:
+Then pass it as a plugin (`-p`) when you run the monitors:
 
 ```bash
 dsc-monitor -p dsc-monitor.js 'monitors/**/*.js'
