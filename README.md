@@ -104,12 +104,11 @@ Each set is a module with:
   - `timeout<Number|String> = '5s' [optional]` - timeout for the monitor before it's considered a failure
   - `slowThreshold<Number|String> = '1s' [optional]` - slow threshold for a monitor
   - `retries<Number> = 1 [optional]` - number of times to retry a failing monitor
-
-<!-- - Optional functions to run within the life cycle of the monitoring set:
-  - `exports.beforeAll<Function>`
-  - `exports.afterAll<Function>`
-  - `exports.beforeEach<Function>`
-  - `exports.afterEach<Function>` -->
+- Optional functions to run within the life cycle of the monitoring set:
+  - `exports.beforeAll<Function>(monitorSetConfig)`
+  - `exports.afterAll<Function>(monitorSetConfig, result)`
+  <!-- - `exports.beforeEach<Function>` -->
+  <!-- - `exports.afterEach<Function>` -->
 
 What certain fields do:
 
