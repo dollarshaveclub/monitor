@@ -26,7 +26,7 @@ const monitorSetConfigs = files
     config.id = config.id || filename
     return config
   })
-  .filter(x => Array.isArray(x.monitors))
+  .filter(x => Array.isArray(x.monitors) && x.monitors.length)
 
 const runMonitors = require('../lib')
 
