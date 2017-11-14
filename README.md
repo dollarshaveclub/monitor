@@ -21,7 +21,7 @@ By switching to this monitoring solution, we were able to:
   - Additionally, we can develop monitors alongside our features, allowing us to develop and merge them simultaneously. We no longer have conflicts between our codebase and our monitors.
 - Able to easily create and manage hundreds of monitors, which is difficult with Terraform (excessive copy pasta) and any UI-based monitors
 
-Because our monitors only use 1 CircleCI container, we essentially pay less than $50/month for unlimited monitors (as long as they run in less than 1 minute). Some downsides to this setup:
+Some downsides to our CircleCI Scheduled Workflow setup are:
 
 - Contention with your other tests. If you run out of CircleCI 2 containers, your monitors will queue then run in bursts.
 - May not be as fast as running monitors as Kubernetes jobs because CircleCI does many commands like `npm install` on every build,
@@ -30,7 +30,7 @@ Because our monitors only use 1 CircleCI container, we essentially pay less than
 
 What about features other monitoring solutions provide?
 
-- We pipe all our metrics to Datadog and create all the relevant dashboards and alerts via Datadog
+<!-- - We pipe all our metrics to Datadog and create all the relevant dashboards and alerts via Datadog -->
 - We still use other services like New Relic for features we need, just not for monitoring everything
 - We don't need to run these monitors from multiple locations.
   If we do, we'll run them as Kubernetes jobs on different clusters.
