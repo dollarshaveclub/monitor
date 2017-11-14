@@ -1,7 +1,7 @@
 test-defaults: &test-defaults
   working_directory: ~/code
   docker:
-    - image: circleci/node:8
+    - image: circleci/node:8-browsers
       environment:
         NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
         JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
@@ -11,7 +11,7 @@ monitor-defaults: &monitor-defaults
   working_directory: ~/code
   resource_class: small
   docker:
-    - image: circleci/node:8
+    - image: circleci/node:8-browsers
       environment:
         NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
         JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
