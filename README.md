@@ -100,7 +100,11 @@ Each set is a module with:
 - `exports.monitors<Array>` - an array of monitors with the following properties:
   - `id<String> [required]` - the ID of the monitor
   - `parameters<Object> [optional]` - parameters to send to the monitor function and for data purposes
-  - `monitor<Function>(monitorConfig, monitorSetConfig) [required]` - the monitor function, which is passed this monitor object as well as `exports`
+  - `monitor<Function>(monitorConfig, monitorSetConfig, { attempt, log }) [required]` - the monitor function, which is passed this monitor object as well as `exports`
+    - `monitorConfig` - this `monitor` object
+    - `monitorSetConfig` - this `exports` object
+    - `attempt = 0` - the attempt # for this monitor
+    - `log(str)` - a function to log in a nicely-formatted way
   - `timeout<Number|String> = '5s' [optional]` - timeout for the monitor before it's considered a failure
   - `slowThreshold<Number|String> = '1s' [optional]` - slow threshold for a monitor
   - `retries<Number> = 0 [optional]` - number of times to retry a failing monitor
