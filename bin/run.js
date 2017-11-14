@@ -49,7 +49,6 @@ runner.exec().then((results) => {
     return
   }
 
-  console.error('Failing monitors detected!')
   process.exitCode = 1
 }).catch((err) => {
   console.error(err.stack)
