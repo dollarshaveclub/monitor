@@ -111,8 +111,8 @@ Each set is a module with:
 - Optional functions to run within the life cycle of the monitoring set:
   - `exports.beforeAll<Function>(monitorSetConfig)`
   - `exports.afterAll<Function>(monitorSetConfig, result)`
-  <!-- - `exports.beforeEach<Function>` -->
-  <!-- - `exports.afterEach<Function>` -->
+  - `exports.beforeEach<Function>(monitorSet, monitorSetConfig, { attempt, log })`
+  - `exports.afterEach<Function>(monitorSet, monitorSetConfig, { attempt, log })`
 
 What certain fields do:
 
