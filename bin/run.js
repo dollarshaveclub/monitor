@@ -13,22 +13,12 @@ const program = require('commander')
   .parse(process.argv)
 
 const debug = require('debug')('monitor:bin')
-const globby = require('globby')
 const path = require('path')
 
-const files = globby.sync(program.args)
-debug('files: %o', files)
-
-const monitorSetConfigs = files
-  .map((filename) => {
-    const config = require(path.resolve(filename))
-    config.filename = filename
-    config.id = config.id || filename
-    return config
-  })
-  .filter(x => Array.isArray(x.monitors) && x.monitors.length)
-
+const findMonitorSets = require('../lib/find-monitor-sets')
 const runMonitors = require('../lib')
+
+const monitorSetConfigs = findMonitorSets(program.args)
 
 const options = {}
 if (program.concurrency && !isNaN(program.concurrency)) options.concurrency = program.concurrency

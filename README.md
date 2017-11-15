@@ -95,6 +95,7 @@ Monitor environment variables:
 All monitoring sets are defined in `monitors/`.
 Each set is a module with:
 
+- `exports.disabled<Boolean> = false` - whether this monitor is disabled
 - `exports.id<String> = __filename [optional]` - an ID for your monitor set, defaulting to the filename
 - `exports.slowThreshold<Number|String> = 30s [optional]` - slow threshold for the entire monitor set
 - `exports.monitors<Array>` - an array of monitors with the following properties:
