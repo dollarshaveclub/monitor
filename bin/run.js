@@ -12,7 +12,7 @@ const program = require('commander')
   .option('-sms, --shuffle-monitor-sets', 'shuffle monitor sets')
   .parse(process.argv)
 
-const debug = require('debug')('monitor:bin')
+const debug = require('debug')('dsc-monitor:bin')
 const path = require('path')
 
 const findMonitorSets = require('../lib/find-monitor-sets')
