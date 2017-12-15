@@ -1,13 +1,12 @@
 
 monitor-defaults: &monitor-defaults
   working_directory: ~/code
-  resource_class: small
   docker:
     - image: circleci/node:8-browsers # remove -browsers if you're not doing browser tests
       environment:
         NPM_CONFIG_LOGLEVEL: error # make npm commands less noisy
         JOBS: max # https://gist.github.com/ralphtheninja/f7c45bdee00784b41fed
-        MONITOR_CONCURRENCY: 1 # we recommend 1 concurrency per CPU
+        MONITOR_CONCURRENCY: 2 # we recommend 1 concurrency per CPU. CircleCI has 2 by default.
         MONITOR_SHUFFLE: 1 # remove if you don't want to shuffle your monitors
 
 restore_cache_keys: &restore_cache_keys
@@ -30,12 +29,16 @@ jobs:
       - run: npm install
       - run: ./node_modules/.bin/dsc-monitor 'monitors/**/*.js'
       - save_cache: *save_cache
+      - store_artifacts:
+          path: ~/code/.artifacts # save test artifacts or results
 
 workflows:
   version: 2
+  # test your monitors on every commit
   commit:
     jobs:
       - monitor
+  # run your monitors every minute
   monitor:
     triggers:
       - schedule:

@@ -40,6 +40,8 @@ jobs:
       - run: npm run test
       - run: ./node_modules/.bin/codecov
       - save_cache: *save_cache
+      - store_artifacts:
+          path: ~/code/.artifacts
 
   monitor:
     <<: *monitor-defaults
@@ -48,6 +50,8 @@ jobs:
       - restore_cache: *restore_cache_keys
       - run: npm install
       - run: ./bin/run.js 'monitors/**/*.js'
+      - store_artifacts:
+          path: ~/code/.artifacts
 
 workflows:
   version: 2
