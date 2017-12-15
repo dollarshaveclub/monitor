@@ -18,3 +18,4 @@ tmp/
 .vagrant
 .nyc_output
 lcov.dat
+.artifacts/
