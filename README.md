@@ -6,18 +6,18 @@
 
 A remote uptime monitoring framework for running monitors as a CRON job.
 
-At Dollar Shave Club, we run our monitors using CircleCI 2 Scheduled Workflows.
-You can see the test monitors for this repository running every minute here: https://circleci.com/gh/dollarshaveclub/workflows/monitor/tree/master.
+At Dollar Shave Club, we run some of our monitors using CircleCI 2 Scheduled Workflows.
+You can see the test/example monitors for this repository running every minute here: https://circleci.com/gh/dollarshaveclub/workflows/monitor/tree/master.
 See our [CircleCI 2 Config](.circleci/config.yml).
 
 ## Motivation
 
-By switching to this monitoring solution, we were able to:
+With this monitoring solution, we were able to:
 
 - Run our monitors every minute instead of every 5 minutes
-- Test our monitoring scripts, both API and Browser scripts, outside of monitoring platform's console. We were unable to do this with our Terraform setup.
-- Use these monitoring scripts as tests for our Dynamic QA environments (our version of [Heroku Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps))
-  - Additionally, we can develop monitors alongside our features, allowing us to develop and merge them simultaneously. We no longer have conflicts between our codebase and our monitors.
+- Test both our API and Browser monitoring scripts outside of a monitoring platform's console/UI. We were unable to do this with our Terraform setup.
+- Use these monitoring scripts as tests for our version of [Heroku Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps)
+  - Additionally, we can develop monitors alongside our features, allowing us to  merge them simultaneously. We no longer have conflicts between our codebase and our monitors.
 - Able to easily create and manage hundreds of monitors, which is difficult with Terraform (excessive copy pasta) and any UI-based monitoring platform.
 
 Some downsides to our CircleCI Scheduled Workflow setup are:
