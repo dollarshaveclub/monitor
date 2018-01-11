@@ -13,7 +13,7 @@
   "devDependencies": {
     "codecov": "^3.0.0",
     "eslint": "^4.10.0",
-    "eslint-config-dollarshaveclub": "^2.2.0",
+    "eslint-config-dollarshaveclub": "^3.0.1",
     "jest": "^22.0.0",
     "puppeteer": "^0.13.0",
     "request": "^2.83.0",
