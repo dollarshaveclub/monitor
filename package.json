@@ -14,7 +14,7 @@
     "codecov": "^3.0.0",
     "eslint": "^4.10.0",
     "eslint-config-dollarshaveclub": "^2.2.0",
-    "jest": "^22.0.0",
+    "jest": "^22.0.6",
     "puppeteer": "^0.13.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
