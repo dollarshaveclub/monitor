@@ -1,6 +1,6 @@
 
 exports = module.exports = function onPageRequest (req) {
-  const { url } = req
+  const url = req.url()
   if (exports.analyticsRegex.test(url)) {
     req.abort()
   } else {
