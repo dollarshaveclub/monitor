@@ -43,7 +43,7 @@ There are two ways to run these monitors.
 To run monitors locally:
 
 ```bash
-./node_modules/.bin/dsc-monitor 'monitors/**/*.js'
+npx dsc-monitor 'monitors/**/*.js'
 ```
 
 Run `dsc-monitor --help` for options.
