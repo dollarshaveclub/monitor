@@ -36,11 +36,26 @@ runner.exec().then((results) => {
   debug('%o', results)
   if (results.every(result => result.success)) {
     process.exitCode = 0
+    gracefullyExit()
     return
   }
 
   process.exitCode = 1
 }).catch((err) => {
-  console.error(err.stack)
+  console.error(err.stack || err)
   process.exitCode = 1
+  gracefullyExit()
 })
+
+process.on('unhandledRejection', (err) => {
+  console.error('Unhandled rejection error, exiting forcefully.')
+  console.error(err.stack || err)
+  process.exit(1)
+})
+
+function gracefullyExit () {
+  setTimeout(() => {
+    console.log('Could not gracefully exit after 30 seconds, exiting forcefully. Please check for leaks.')
+    process.exit()
+  }, 30 * 1000).unref()
+}
