@@ -10,11 +10,13 @@ const program = require('commander')
   .option('-s, --shuffle', 'shuffle monitors and monitor sets')
   .option('-sm, --shuffle-monitors', 'shuffle monitors')
   .option('-sms, --shuffle-monitor-sets', 'shuffle monitor sets')
+  .option('-t, --timeout <interval>', 'timeout')
   .parse(process.argv)
 
 const debug = require('debug')('dsc-monitor:bin')
 const path = require('path')
 
+const { toMS, logElapsedTime, sleep } = require('../lib/utils')
 const findMonitorSets = require('../lib/find-monitor-sets')
 const runMonitors = require('../lib')
 
@@ -46,6 +48,14 @@ runner.exec().then((results) => {
   process.exitCode = 1
   gracefullyExit()
 })
+
+if (program.timeout) {
+  const ms = toMS(~~program.timeout || program.timeout)
+  sleep(ms).then(() => {
+    console.error('Monitors did not finish in the timeout set of %s, force quitting.', logElapsedTime(ms))
+    process.exit(1)
+  })
+}
 
 process.on('unhandledRejection', (err) => {
   console.error('Unhandled rejection error, exiting forcefully.')
