@@ -56,6 +56,7 @@ jobs:
   docker:
     machine: true
     steps:
+      - checkout
       - run: docker build . -t dsc-monitor
       - run: docker run -t dsc-monitor monitors/google-with-monitor-browser-selector.js
 
