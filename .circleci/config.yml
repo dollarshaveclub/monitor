@@ -53,11 +53,18 @@ jobs:
       - store_artifacts:
           path: ~/code/.artifacts
 
+  docker:
+    machine: true
+    steps:
+      - run: docker build . -t dsc-monitor
+      - run: docker run -t dsc-monitor monitors/google-with-monitor-browser-selector.js
+
 workflows:
   version: 2
   commit:
     jobs:
       - test
+      - docker
       - monitor
   monitor:
     triggers:

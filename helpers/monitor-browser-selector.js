@@ -48,6 +48,11 @@ module.exports = (exports, routes, {
     debug('launched browser')
     browser = await puppeteer.launch({
       headless: process.env.CHROME_HEADLESS !== '0',
+      executablePath: process.env.CHROME_EXECUTABLE_PATH || null,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+      ],
     })
     debug('parameters: %o', parameters)
     page = await browser.newPage()
