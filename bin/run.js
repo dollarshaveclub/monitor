@@ -43,6 +43,7 @@ runner.exec().then((results) => {
   }
 
   process.exitCode = 1
+  gracefullyExit()
 }).catch((err) => {
   console.error(err.stack || err)
   process.exitCode = 1
@@ -53,7 +54,7 @@ if (program.timeout) {
   const ms = toMS(~~program.timeout || program.timeout)
   sleep(ms).then(() => {
     console.error('Monitors did not finish in the timeout set of %s, force quitting.', logElapsedTime(ms))
-    process.exit()
+    process.exit(1)
   })
 }
 
