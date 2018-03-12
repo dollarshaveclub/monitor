@@ -16,7 +16,7 @@
     "eslint-config-dollarshaveclub": "^3.0.4",
     "jest": "^22.0.0",
     "puppeteer": "^1.0.0",
-    "request": "^2.83.0",
+    "request": "^2.84.0",
     "request-promise": "^4.2.2"
   },
   "dependencies": {
