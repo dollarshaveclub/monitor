@@ -21,7 +21,7 @@ async function afterEach () {
 
 exports.parallelism = 4
 exports.slowThreshold = '30s'
-exports.monitors = new Array(12).fill(0).map((NULL, i) => ({
+exports.monitors = new Array(4).fill(0).map((NULL, i) => ({
   id: `google.com #searchform ${i}`,
   parameters: {
     url: 'https://google.com',
