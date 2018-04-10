@@ -97,6 +97,7 @@ Each set is a module with:
 - `exports.disabled<Boolean> = false` - whether this monitor is disabled
 - `exports.id<String> = __filename [optional]` - an ID for your monitor set, defaulting to the filename
 - `exports.slowThreshold<Number|String> = 30s [optional]` - slow threshold for the entire monitor set
+- `exports.parallelism<Number> = 1 [optional]` - split this monitor set into shards and run in parallel
 - `exports.monitors<Array>` - an array of monitors with the following properties:
   - `id<String> [required]` - the ID of the monitor
   - `parameters<Object> [optional]` - parameters to send to the monitor function and for data purposes
