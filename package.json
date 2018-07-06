@@ -11,7 +11,7 @@
   "author": "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)",
   "license": "MIT",
   "devDependencies": {
-    "codecov": "^3.0.0",
+    "codecov": "^3.0.3",
     "eslint": "^4.10.0",
     "eslint-config-dollarshaveclub": "^3.0.4",
     "jest": "^22.0.0",
