@@ -11,22 +11,22 @@
   "author": "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)",
   "license": "MIT",
   "devDependencies": {
-    "codecov": "^3.0.0",
+    "codecov": "3.0.0",
     "eslint": "5.0.1",
     "eslint-config-dollarshaveclub": "^3.0.4",
-    "jest": "^22.0.0",
-    "puppeteer": "^1.0.0",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "jest": "22.0.0",
+    "puppeteer": "1.0.0",
+    "request": "2.83.0",
+    "request-promise": "4.2.2"
   },
   "dependencies": {
-    "chalk": "^2.3.0",
-    "commander": "^2.11.0",
-    "debug": "^3.1.0",
-    "globby": "^7.1.1",
-    "lodash": "^4.17.4",
-    "ms": "^2.1.1",
-    "p-all": "^1.0.0"
+    "chalk": "2.3.0",
+    "commander": "2.11.0",
+    "debug": "3.1.0",
+    "globby": "7.1.1",
+    "lodash": "4.17.4",
+    "ms": "2.1.1",
+    "p-all": "1.0.0"
   },
   "jest": {
     "testEnvironment": "node"
