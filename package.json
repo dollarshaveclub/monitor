@@ -12,7 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "codecov": "3.0.0",
-    "eslint": "5.0.1",
+    "eslint": "5.14.1",
     "eslint-config-dollarshaveclub": "^3.0.4",
     "jest": "22.0.0",
     "puppeteer": "1.0.0",
